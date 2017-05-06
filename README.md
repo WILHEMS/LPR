@@ -1,2 +1,3 @@
 # LPR
-License Plate Recognition
+License Plate Recognition  
+Ispired by the work of Chris Dahms (https://github.com/MicrocontrollersAndMore)
