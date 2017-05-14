@@ -11,6 +11,7 @@ from os import path
 from time import time
 from sys import exit, argv
 from Auxiliary import Struct
+from ast import literal_eval
 from LPR_wrapper import LPR_wrapper
 from getopt import getopt, GetoptError
 
