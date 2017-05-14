@@ -1,17 +1,18 @@
 # !/usr/bin/python
-#  _     _                           ____  _       _         ____                            _ _   _
-# | |   (_) ___ ___ _ __  ___  ___  |  _ \| | __ _| |_ ___  |  _ \ ___  ___ ___   __ _ _ __ (_) |_(_) ___  _ __
-# | |   | |/ __/ _ \ '_ \/ __|/ _ \ | |_) | |/ _` | __/ _ \ | |_) / _ \/ __/ _ \ / _` | '_ \| | __| |/ _ \| '_ \
-# | |___| | (__  __/ | | \__ \  __/ |  __/| | (_| | |_  __/ |  _ <  __/ (__ (_) | (_| | | | | | |_| | (_) | | | |
-# |_____|_|\___\___|_| |_|___/\___| |_|   |_|\__,_|\__\___| |_| \_\___|\___\___/ \__, |_| |_|_|\__|_|\___/|_| |_|
-#                                                                                |___/
+# __        __    _       _       ____                            _ _   _
+# \ \      / /_ _| |_ ___| |__   |  _ \ ___  ___ ___   __ _ _ __ (_) |_(_) ___  _ __
+#  \ \ /\ / / _` | __/ __| '_ \  | |_) / _ \/ __/ _ \ / _` | '_ \| | __| |/ _ \| '_ \
+#   \ V  V / (_| | |_ (__| | | | |  _ <  __/ (__ (_) | (_| | | | | | |_| | (_) | | | |
+#    \_/\_/ \__,_|\__\___|_| |_| |_| \_\___|\___\___/ \__, |_| |_|_|\__|_|\___/|_| |_|
+#                                                     |___/
 # (c) Shahar Gino, May-2017, sgino209@gmail.com
 
 from os import path
 from time import time
 from sys import exit, argv
 from Auxiliary import Struct
-from LPR_wrapper import LPR_wrapper
+from ast import literal_eval
+from WatchRecognition import WatchRecognition
 from getopt import getopt, GetoptError
 
 __version__ = "1.0"
@@ -35,7 +36,7 @@ def main(_argv):
 
     # Default parameters:
     args = Struct(
-        ImageFile="/Users/shahargino/Documents/ImageProcessing/LPR/Database/1.jpg",
+        ImageFile="/Users/shahargino/PycharmProjects/WatchRecogintion_serNum/test_images/Original/Bell_Ross_BR01-10TH-CE-012_500.JPG",
         PreprocessGaussKernel=(5, 5),
         PreprocessThreshBlockSize=19,
         PreprocessThreshweight=9,
@@ -52,13 +53,13 @@ def main(_argv):
         MaxPixelArea=float("inf"),
         MinDiagSizeMultipleAway=0.3,
         MaxDiagSizeMultipleAway=5.0,
-        MinChangeInArea=0,
+        MinChangeInArea=0.0,
         MaxChangeInArea=0.5,
-        MinChangeInWidth=0,
+        MinChangeInWidth=0.0,
         MaxChangeInWidth=0.8,
-        MinChangeInHeight=0,
+        MinChangeInHeight=0.0,
         MaxChangeInHeight=0.2,
-        MinAngleBetweenChars=0,
+        MinAngleBetweenChars=0.0,
         MaxAngleBetweenChars=12.0,
         MinNumberOfMatchingChars=3,
         MaxNumberOfMatchingChars=7,
@@ -98,67 +99,67 @@ def main(_argv):
             elif opt in "-i":
                 args.ImageFile = user_arg
             elif opt in "--PreprocessGaussKernel":
-                args.PreprocessGaussKernel = user_arg
+                args.PreprocessGaussKernel = literal_eval(user_arg)
             elif opt in "--PreprocessThreshBlockSize":
-                args.PreprocessThreshBlockSize = user_arg
+                args.PreprocessThreshBlockSize = int(user_arg)
             elif opt in "--PreprocessThreshweight":
-                args.PreprocessThreshweight = user_arg
+                args.PreprocessThreshweight = int(user_arg)
             elif opt in "--PreprocessMorphKernel":
-                args.PreprocessMorphKernel = user_arg
+                args.PreprocessMorphKernel = literal_eval(user_arg)
             elif opt in "--PlateWidthPaddingFactor":
-                args.PlateWidthPaddingFactor = user_arg
+                args.PlateWidthPaddingFactor = float(user_arg)
             elif opt in "--PlateHeightPaddingFactor":
-                args.PlateHeightPaddingFactor = user_arg
+                args.PlateHeightPaddingFactor = float(user_arg)
             elif opt in "--MinPixelWidth":
-                args.MinPixelWidth = user_arg
+                args.MinPixelWidth = float(user_arg)
             elif opt in "--MaxPixelWidth":
-                args.MaxPixelWidth = user_arg
+                args.MaxPixelWidth = float(user_arg)
             elif opt in "--MinPixelHeight":
-                args.MinPixelHeight = user_arg
+                args.MinPixelHeight = float(user_arg)
             elif opt in "--MaxPixelHeight":
-                args.MaxPixelHeight = user_arg
+                args.MaxPixelHeight = float(user_arg)
             elif opt in "--MinAspectRatio":
-                args.MinAspectRatio = user_arg
+                args.MinAspectRatio = float(user_arg)
             elif opt in "--MaxAspectRatio":
-                args.MaxAspectRatio = user_arg
+                args.MaxAspectRatio = float(user_arg)
             elif opt in "--MinPixelArea":
-                args.MinPixelArea = user_arg
+                args.MinPixelArea = float(user_arg)
             elif opt in "--MaxPixelArea":
-                args.MaxPixelArea = user_arg
+                args.MaxPixelArea = float(user_arg)
             elif opt in "--MinDiagSizeMultipleAway":
-                args.MinDiagSizeMultipleAway = user_arg
+                args.MinDiagSizeMultipleAway = float(user_arg)
             elif opt in "--MaxDiagSizeMultipleAway":
-                args.MaxDiagSizeMultipleAway = user_arg
+                args.MaxDiagSizeMultipleAway = float(user_arg)
             elif opt in "--MinChangeInArea":
-                args.MinChangeInArea = user_arg
+                args.MinChangeInArea = float(user_arg)
             elif opt in "--MaxChangeInArea":
-                args.MaxChangeInArea = user_arg
+                args.MaxChangeInArea = float(user_arg)
             elif opt in "--MinChangeInWidth":
-                args.MinChangeInWidth = user_arg
+                args.MinChangeInWidth = float(user_arg)
             elif opt in "--MaxChangeInWidth":
-                args.MaxChangeInWidth = user_arg
+                args.MaxChangeInWidth = float(user_arg)
             elif opt in "--MinChangeInHeight":
-                args.MinChangeInHeight = user_arg
+                args.MinChangeInHeight = float(user_arg)
             elif opt in "--MaxChangeInHeight":
-                args.MaxChangeInHeight = user_arg
+                args.MaxChangeInHeight = float(user_arg)
             elif opt in "--MinAngleBetweenChars":
-                args.MinAngleBetweenChars = user_arg
+                args.MinAngleBetweenChars = float(user_arg)
             elif opt in "--MaxAngleBetweenChars":
-                args.MaxAngleBetweenChars = user_arg
+                args.MaxAngleBetweenChars = float(user_arg)
             elif opt in "--MinNumberOfMatchingChars":
-                args.MinNumberOfMatchingChars = user_arg
+                args.MinNumberOfMatchingChars = int(user_arg)
             elif opt in "--MaxNumberOfMatchingChars":
-                args.MaxNumberOfMatchingChars = user_arg
+                args.MaxNumberOfMatchingChars = int(user_arg)
             elif opt in "--ResizedCharImageWidth":
-                args.ResizedCharImageWidth = user_arg
+                args.ResizedCharImageWidth = int(user_arg)
             elif opt in "--ResizedCharImageHeight":
-                args.ResizedCharImageHeight = user_arg
+                args.ResizedCharImageHeight = int(user_arg)
             elif opt in "--kClassfications":
                 args.kClassfications = user_arg
             elif opt in "--kFlattenedImages":
                 args.kFlattenedImages = user_arg
             elif opt in "--kFactorKNN":
-                args.kFactorKNN = user_arg
+                args.kFactorKNN = int(user_arg)
             elif opt in "--batch":
                 args.batchMode = True
             elif opt in "--debug":
@@ -169,54 +170,54 @@ def main(_argv):
         exit(2)
 
     # -- .. -- .. -- .. -- .. -- .. -- .. -- .. -- .. -- .. -- .. -- .. -- .. -- .. -- .. -- .. -- ..
-    # Generate an LPR object:
-    lpr = LPR_wrapper(args.PreprocessGaussKernel,      # Preprocessing: gaussian kernel, for smoothing
-                      args.PreprocessThreshBlockSize,  # Preprocessing: adaptive threshold, block size
-                      args.PreprocessThreshweight,     # Preprocessing: adaptive threshold, weight
-                      args.PreprocessMorphKernel,      # Preprocessing: morphological structuring kernel
-                      args.PlateWidthPaddingFactor,    # Plate width padding factor, used for plate extraction
-                      args.PlateHeightPaddingFactor,   # Plate height padding factor, used for plate extraction
-                      args.MinPixelWidth,              # Minimal width (#pixels) for a character to be detected
-                      args.MaxPixelWidth,              # Maximal width (#pixels) for a character to be detected
-                      args.MinPixelHeight,             # Minimal height (#pixels) for a character to be detected
-                      args.MaxPixelHeight,             # Maximal height (#pixels) for a character to be detected
-                      args.MinAspectRatio,             # Minimal aspect ratio (W/H) for a character to be detected
-                      args.MaxAspectRatio,             # Maximal aspect ratio (W/H) for a character to be detected
-                      args.MinPixelArea,               # Minimal area (#pixels) for a character to be detected
-                      args.MaxPixelArea,               # Maximal area (#pixels) for a character to be detected
-                      args.MinDiagSizeMultipleAway,    # Sizing factor for overlapping characters decision (% of character size)
-                      args.MaxDiagSizeMultipleAway,    # Sizing factor for matching characters decision (% of character size)
-                      args.MinChangeInArea,            # Normalized Area difference for matching characters decision, lower boundary
-                      args.MaxChangeInArea,            # Normalized Area difference for matching characters decision, upper boundary
-                      args.MinChangeInWidth,           # Normalized Width difference for matching characters decision, lower boundary
-                      args.MaxChangeInWidth,           # Normalized Width difference for matching characters decision, upper boundary
-                      args.MinChangeInHeight,          # Normalized Height difference for matching characters decision, lower boundary
-                      args.MaxChangeInHeight,          # Normalized Height difference for matching characters decision, upper boundary
-                      args.MinAngleBetweenChars,       # Angle difference (degrees) for matching characters decision, lower boundary
-                      args.MaxAngleBetweenChars,       # Angle difference (degrees) for matching characters decision, upper boundary
-                      args.MinNumberOfMatchingChars,   # Minimal amount of characters in the plate ("matching characters")
-                      args.MaxNumberOfMatchingChars,   # Maximal amount of characters in the plate ("matching characters")
-                      args.ResizedCharImageWidth,      # Character Resizing width attribute (in pixels), necessary for the OCR stage
-                      args.ResizedCharImageHeight,     # Character Resizing height attribute (in pixels), necessary for the OCR stage
-                      args.kClassfications,            # KNN training data: classification results (see openCV docs)
-                      args.kFlattenedImages,           # KNN training data: flattened images (see openCV docs)
-                      args.kFactorKNN,                 # KNN factor, for digits classification
-                      args.batchMode,                  # Run in batch mode, minimal debug info and w/o figures
-                      args.debugMode)                  # Enable debug printouts and intermediate figures
+    # Generate an WatchRecognition object:
+    watchReq = WatchRecognition(args.PreprocessGaussKernel,      # Preprocessing: gaussian kernel, for smoothing
+                                args.PreprocessThreshBlockSize,  # Preprocessing: adaptive threshold, block size
+                                args.PreprocessThreshweight,     # Preprocessing: adaptive threshold, weight
+                                args.PreprocessMorphKernel,      # Preprocessing: morphological structuring kernel
+                                args.PlateWidthPaddingFactor,    # Plate width padding factor, used for plate extraction
+                                args.PlateHeightPaddingFactor,   # Plate height padding factor, used for plate extraction
+                                args.MinPixelWidth,              # Minimal width (#pixels) for a character to be detected
+                                args.MaxPixelWidth,              # Maximal width (#pixels) for a character to be detected
+                                args.MinPixelHeight,             # Minimal height (#pixels) for a character to be detected
+                                args.MaxPixelHeight,             # Maximal height (#pixels) for a character to be detected
+                                args.MinAspectRatio,             # Minimal aspect ratio (W/H) for a character to be detected
+                                args.MaxAspectRatio,             # Maximal aspect ratio (W/H) for a character to be detected
+                                args.MinPixelArea,               # Minimal area (#pixels) for a character to be detected
+                                args.MaxPixelArea,               # Maximal area (#pixels) for a character to be detected
+                                args.MinDiagSizeMultipleAway,    # Sizing factor for overlapping characters decision (% of character size)
+                                args.MaxDiagSizeMultipleAway,    # Sizing factor for matching characters decision (% of character size)
+                                args.MinChangeInArea,            # Normalized Area difference for matching characters decision, lower boundary
+                                args.MaxChangeInArea,            # Normalized Area difference for matching characters decision, upper boundary
+                                args.MinChangeInWidth,           # Normalized Width difference for matching characters decision, lower boundary
+                                args.MaxChangeInWidth,           # Normalized Width difference for matching characters decision, upper boundary
+                                args.MinChangeInHeight,          # Normalized Height difference for matching characters decision, lower boundary
+                                args.MaxChangeInHeight,          # Normalized Height difference for matching characters decision, upper boundary
+                                args.MinAngleBetweenChars,       # Angle difference (degrees) for matching characters decision, lower boundary
+                                args.MaxAngleBetweenChars,       # Angle difference (degrees) for matching characters decision, upper boundary
+                                args.MinNumberOfMatchingChars,   # Minimal amount of characters in the plate ("matching characters")
+                                args.MaxNumberOfMatchingChars,   # Maximal amount of characters in the plate ("matching characters")
+                                args.ResizedCharImageWidth,      # Character Resizing width attribute (in pixels), necessary for the OCR stage
+                                args.ResizedCharImageHeight,     # Character Resizing height attribute (in pixels), necessary for the OCR stage
+                                args.kClassfications,            # KNN training data: classification results (see openCV docs)
+                                args.kFlattenedImages,           # KNN training data: flattened images (see openCV docs)
+                                args.kFactorKNN,                 # KNN factor, for digits classification
+                                args.batchMode,                  # Run in batch mode, minimal debug info and w/o figures
+                                args.debugMode)                  # Enable debug printouts and intermediate figures
 
     # Load input scene image:
-    imgOriginalScene = lpr.load_input_scene_image(args.ImageFile)
+    imgOriginalScene = watchReq.load_input_scene_image(args.ImageFile)
 
     # Plates detection (within the given image):
-    listOfPossiblePlates = lpr.detect_plates_in_scene(imgOriginalScene)
+    listOfPossiblePlates = watchReq.detect_plates_in_scene(imgOriginalScene)
 
     # Characters detection (within the pre-detected plate):
-    listOfPossibleChars = lpr.detect_characters_in_plate(listOfPossiblePlates)
+    listOfPossibleChars = watchReq.detect_characters_in_plate(listOfPossiblePlates)
 
     # Report the analysis result:
-    lpr.report_result(imgOriginalScene,
-                      listOfPossibleChars,
-                      path.basename(args.ImageFile).replace(".", "_out."))
+    watchReq.report_result(imgOriginalScene,
+                           listOfPossibleChars,
+                           path.basename(args.ImageFile).replace(".", "_out."))
 
 # ---------------------------------------------------------------------------------------------------------------
 
