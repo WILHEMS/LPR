@@ -144,6 +144,7 @@ def findPossibleCharsInScene(binaryImage, MinPixelWidth, MaxPixelWidth, MinPixel
     if debugMode:
         debug("Amount of detected contours: %d" % len(contours), True)
         debug("Amount of possible characters: %d" % intCountOfPossibleChars, True)
+        imwrite("img_contours_all.jpg", imgContours)
 
     return listOfPossibleChars
 
