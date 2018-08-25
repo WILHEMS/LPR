@@ -1,0 +1,12 @@
+How to connect Secomea LinkManager (over Google VM)?
+----------------------------------------------------
+(1) Open Google Chrome browser
+(2) Go to:  https://console.cloud.google.com/compute/instances?_ga=2.163890815.-1102889104.1505067185
+(3) Copy the "External IP" of the Windows VM, aka "instance-3" (typically equals to: 104.155.177.186)
+(4) Launch Chrome RDP application, and login to the "External IP"
+    user:      sgino209
+    password:  &16V-PgW2vP^^dl
+(5) In the VM, launch the LinkManager shortcut at the desktop
+(6) Browse for the certification file, which is allocated in the Downloads folder + password=uctxuzbgpk6570
+(7) VNC password = kds1608
+

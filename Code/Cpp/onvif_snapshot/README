@@ -1,0 +1,5 @@
+Take a snapshot from IP Camera over ONVIF (http://shoaib-ahmed.com/onvif-gsoap-in-c-by-example)
+
+./ipconvif -cIp '192.168.226.201' -cUsr 'admin' -cPwd '123456'
+
+
